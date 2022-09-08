@@ -70,6 +70,14 @@ ReportWebSocket.GeneralSmsEnum = {
 };
 ```
 
+## 静态方法
+
+| 方法      | 描述 |
+| ----------- | ----------- |
+| onUserCountMessage      | 用户列表       |
+| onAnnouncement   | 公告        |
+| onPullBack   | 黑明单        |
+
 ## 实例方法
 
 ###  reportRecord 记录发言
