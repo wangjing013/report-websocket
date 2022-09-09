@@ -54,7 +54,7 @@ class ReportWebSocket {
           if (isPlainObject(result)) {
             const { type } = result.data;
             switch (type) {
-              case 0: // 成员列表
+              case 1: // 成员列表
                 isFunction(ReportWebSocket.onUserCountMessage) &&
                   ReportWebSocket.onUserCountMessage(result.data);
                 break;
@@ -65,6 +65,13 @@ class ReportWebSocket {
               case 3: // 公告
                 isFunction(ReportWebSocket.onAnnouncement) &&
                   ReportWebSocket.onAnnouncement(result.data);
+                break;
+              case 4: // 关闭连接
+                that.websocket.close();
+                break;
+              case 5: // 更新直播状态
+                isFunction(ReportWebSocket.onUpdateLiveStatus) &&
+                  ReportWebSocket.onUpdateLiveStreamStatus(result.data);
                 break;
               default:
                 break;
@@ -87,6 +94,11 @@ ReportWebSocket.onAnnouncement = function (data) {
 };
 // 黑名单
 ReportWebSocket.onPullBack = function (data) {
+  logger.info("【黑明单】", data);
+};
+
+// 更新直播状态
+ReportWebSocket.onUpdateLiveStreamStatus = function (data) {
   logger.info("【黑明单】", data);
 };
 

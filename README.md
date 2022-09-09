@@ -77,6 +77,7 @@ ReportWebSocket.GeneralSmsEnum = {
 | onUserCountMessage      | 用户列表       |
 | onAnnouncement   | 公告        |
 | onPullBack   | 黑明单        |
+| onUpdateLiveStreamStatus| 更新直播状态 |
 
 ## 实例方法
 

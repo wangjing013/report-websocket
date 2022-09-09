@@ -72,13 +72,13 @@ export default class IMWebSocket {
   // 关闭连接
   close() {
     this.socket.close();
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   // 销毁
   destory() {
     this.close();
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
   }
 }
