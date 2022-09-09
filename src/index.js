@@ -70,7 +70,7 @@ class ReportWebSocket {
                 that.websocket.close();
                 break;
               case 5: // 更新直播状态
-                isFunction(ReportWebSocket.onUpdateLiveStatus) &&
+                isFunction(ReportWebSocket.onUpdateLiveStreamStatus) &&
                   ReportWebSocket.onUpdateLiveStreamStatus(result.data);
                 break;
               default:
