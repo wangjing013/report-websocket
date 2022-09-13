@@ -29,7 +29,12 @@ const getFinger = (function () {
 class ReportWebSocket {
   constructor(options = {}) {
     this.options = options;
-    const wss = domains[options.env];
+    let wss;
+    if (options.wss) {
+      wss = options.wss;
+    } else {
+      wss = domains[options.env];
+    }
     if (wss === undefined) {
       throw new Error("未找到可用的Websocket连接地址，请检查 env 参数");
     }

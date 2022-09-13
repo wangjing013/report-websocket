@@ -18,6 +18,7 @@ const params = {
 const websocket = await ReportWebSocket.initialize({
   ...params,
   env: "test", // 环境    
+  wss: '', // 可选 如果传入了 wss 地址，默认会忽略 env 。 主要方便本地调试
   plateForm: ReportWebSocket.WatchSide.studySide, // 观看端(学员端｜助教端)
 })
 
