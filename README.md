@@ -66,7 +66,8 @@ ReportWebSocket.MessageStatus = {
 // 发送消息方式
 ReportWebSocket.GeneralSmsEnum = {
   manualRefresh: 0, // 手动刷新
-  remark: 1, // 记录
+  record: 1, // 发言
+  remark: 6, // 记录
 };
 ```
 
@@ -78,6 +79,7 @@ ReportWebSocket.GeneralSmsEnum = {
 | onAnnouncement   | 公告        |
 | onPullBack   | 黑明单        |
 | onUpdateLiveStreamStatus| 更新直播状态 |
+| onRemarkStatus | 监听备注更新状态 |
 
 ## 实例方法
 
@@ -98,6 +100,21 @@ reportWebScoket.updateOptions({
     bzId: ''
 })
 ```
+
+### 更新备注
+
+```js
+reportWebScoket.setRemark({
+  smsId: '', // UUID
+  bzId: '', // 助教老师ID
+  remarkDTO: {
+    "userId": "", // 用户ID
+    "nickName": "" // 用户昵称
+  }
+})
+```
+
+
 ###  leave 关闭 websocket
 ```js
 reportWebScoket.leave()

@@ -73,6 +73,10 @@ class ReportWebSocket {
                 isFunction(ReportWebSocket.onUpdateLiveStreamStatus) &&
                   ReportWebSocket.onUpdateLiveStreamStatus(result.data);
                 break;
+              case 6: // 更新备注
+                isFunction(ReportWebSocket.onRemarkStatus) &&
+                  ReportWebSocket.onRemarkStatus(result.data);
+                break;
               default:
                 break;
             }
@@ -88,10 +92,12 @@ class ReportWebSocket {
 ReportWebSocket.onUserCountMessage = function (data) {
   logger.info("【用户列表】", data);
 };
+
 // 公告
 ReportWebSocket.onAnnouncement = function (data) {
   logger.info("【公告】", data);
 };
+
 // 黑名单
 ReportWebSocket.onPullBack = function (data) {
   logger.info("【黑明单】", data);
@@ -100,6 +106,11 @@ ReportWebSocket.onPullBack = function (data) {
 // 更新直播状态
 ReportWebSocket.onUpdateLiveStreamStatus = function (data) {
   logger.info("【黑明单】", data);
+};
+
+// 备注更新状态
+ReportWebSocket.onRemarkStatus = function (data) {
+  logger.info("【备注更新】", data);
 };
 
 // 观看端
@@ -131,7 +142,8 @@ ReportWebSocket.MessageStatus = {
 // 发送消息方式
 ReportWebSocket.GeneralSmsEnum = {
   manualRefresh: 0, // 手动刷新
-  remark: 1, // 记录
+  record: 1, // 记录
+  remark: 6, // 备注
 };
 
 ReportWebSocket.initialize = async function (options = {}) {
@@ -172,7 +184,7 @@ ReportWebSocket.prototype.reportRecord = function () {
   const data = {
     ...this.options,
     status: ReportWebSocket.MessageStatus.normalStatus,
-    generalSmsEnum: ReportWebSocket.GeneralSmsEnum.remark,
+    generalSmsEnum: ReportWebSocket.GeneralSmsEnum.record,
   };
   this.websocket.send(JSON.stringify(data));
 };
@@ -182,6 +194,16 @@ ReportWebSocket.prototype.refreshRecord = function () {
     ...this.options,
     status: ReportWebSocket.MessageStatus.normalStatus,
     generalSmsEnum: ReportWebSocket.GeneralSmsEnum.manualRefresh,
+  };
+  this.websocket.send(JSON.stringify(data));
+};
+
+ReportWebSocket.prototype.setRemark = function (params) {
+  const data = {
+    ...this.options,
+    ...params,
+    status: ReportWebSocket.MessageStatus.normalStatus,
+    generalSmsEnum: ReportWebSocket.GeneralSmsEnum.remark,
   };
   this.websocket.send(JSON.stringify(data));
 };
