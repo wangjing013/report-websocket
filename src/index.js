@@ -59,7 +59,7 @@ class ReportWebSocket {
           if (isPlainObject(result)) {
             const { type } = result.data;
             switch (type) {
-              case 1: // 成员列表
+              case 0: // 成员列表
                 isFunction(ReportWebSocket.onUserCountMessage) &&
                   ReportWebSocket.onUserCountMessage(result.data);
                 break;
