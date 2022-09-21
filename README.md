@@ -115,6 +115,13 @@ reportWebScoket.setRemark({
 })
 ```
 
+### 上报禁言状态
+```js
+  reportWebScoket.reportBanChat({
+    value: 0 // 0 取消禁言 1 禁言
+  })
+```
+
 
 ###  leave 关闭 websocket
 ```js

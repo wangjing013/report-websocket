@@ -149,6 +149,7 @@ ReportWebSocket.GeneralSmsEnum = {
   manualRefresh: 0, // 手动刷新
   record: 1, // 记录
   remark: 6, // 备注
+  ban: 7, // 禁言
 };
 
 ReportWebSocket.initialize = async function (options = {}) {
@@ -209,6 +210,16 @@ ReportWebSocket.prototype.setRemark = function (params) {
     ...params,
     status: ReportWebSocket.MessageStatus.normalStatus,
     generalSmsEnum: ReportWebSocket.GeneralSmsEnum.remark,
+  };
+  this.websocket.send(JSON.stringify(data));
+};
+
+ReportWebSocket.prototype.reportBanChat = function (params) {
+  const data = {
+    ...this.options,
+    ...params,
+    status: ReportWebSocket.MessageStatus.normalStatus,
+    generalSmsEnum: ReportWebSocket.GeneralSmsEnum.ban,
   };
   this.websocket.send(JSON.stringify(data));
 };
